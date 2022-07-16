@@ -12,13 +12,12 @@ pipeline {
             steps{
                 echo "Deployment started ..."
                 sh 'ls -ltr'
-                sh 'pwd'
-                sh "deployment.yaml"
+                sh 'pwd'}
                 step([$class: 'KubernetesEngineBuilder', \
                   projectId: env.PROJECT_ID, \
                   clusterName: env.CLUSTER_NAME, \
                   location: env.LOCATION, \
-                  manifestPattern: 'tomcat.yaml', \
+                  manifestPattern: 'nodejs.yaml', \
                   credentialsId: env.CREDENTIALS_ID, \
                   verifyDeployments: true])
                 }
