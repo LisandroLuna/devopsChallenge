@@ -12,7 +12,7 @@ pipeline {
             steps{
                 echo "Deployment started ..."
                 sh 'ls -ltr'
-                sh 'pwd'}
+                sh 'pwd'
                 step([$class: 'KubernetesEngineBuilder', \
                   projectId: env.PROJECT_ID, \
                   clusterName: env.CLUSTER_NAME, \
