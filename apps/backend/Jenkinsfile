@@ -7,22 +7,17 @@ pipeline {
         CREDENTIALS_ID = 'My First Project'
     }
     stages {
-        stage('Deploy to K8s') {
-             steps{
-                step{
-                        def remote = [:]
-                        remote.name = 'worker'
-                        remote.host = '10.128.0.11'
-                        remote.user = 'jenkins'
-                        remote.password = env.jenkinsgce
-                        remote.allowAnyHosts = true
-                        stage('Remote SSH') {
-                            sshCommand remote: remote, command: "ls -lrt"
-                        }
-                }
-
-            //    step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'apps/backend/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-             }
+        
+        def remote = [:]
+        remote.name = 'worker'
+        remote.host = '10.128.0.11'
+        remote.user = 'jenkins'
+        remote.password = env.jenkinsgce
+        remote.allowAnyHosts = true
+        stage('Remote SSH') {
+            sshCommand remote: remote, command: "ls -lrt"
         }
+            //    step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'apps/backend/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+            
     }
 }
