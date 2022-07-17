@@ -7,13 +7,17 @@ pipeline {
         CREDENTIALS_ID = 'My First Project'
     }
     stages {
-        stage('Deploy to K8s') {
-            steps{
-                withKubeConfig([credentialsId: 'cluster001',
-                    serverUrl: '35.225.244.101',
-                    clusterName: 'cluster001'
-                    ]) {
-                    sh 'kubectl get pods'
+        podTemplate(inheritFrom: 'default'){
+            node(POD_LABEL){
+                stage('Deploy to K8s') {
+                    steps{
+                        withKubeConfig([credentialsId: 'cluster001',
+                            serverUrl: '35.225.244.101',
+                            clusterName: 'cluster001'
+                            ]) {
+                            sh 'kubectl get pods'
+                        }
+                    }
                 }
             }
         }
