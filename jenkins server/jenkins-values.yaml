@@ -243,6 +243,7 @@ controller:
     - git:4.11.3
     - configuration-as-code:1429.v09b_044a_c93de
     - google-kubernetes-engine:0.8.7
+    - github:1.34.4
 
   # Set to false to download the minimum required version of all dependencies.
   installLatestPlugins: true
