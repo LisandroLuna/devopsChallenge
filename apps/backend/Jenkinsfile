@@ -13,7 +13,7 @@ pipeline {
                     steps{
                         withKubeConfig([credentialsId: 'cluster001',
                             serverUrl: '35.225.244.101',
-                            clusterName: 'cluster001'
+                            clusterName: env.CLUSTER_NAME
                             ]) {
                             sh 'kubectl get pods'
                         }
