@@ -20,7 +20,7 @@ pipeline {
                   projectId: env.PROJECT_ID, \
                   clusterName: env.CLUSTER_NAME, \
                   location: env.LOCATION, \
-                  manifestPattern: 'apps/backend/tomcat.yaml', \
+                  manifestPattern: 'apps/backend/', \
                   credentialsId: env.CREDENTIALS_ID, \
                   verifyDeployments: true])
                 }
