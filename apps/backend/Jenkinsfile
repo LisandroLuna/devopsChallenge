@@ -8,8 +8,17 @@ node {
     withCredentials([sshUserPrivateKey(credentialsId: 'sshUser', keyFileVariable: 'identifyFile', passphraseVariable: '', usernameVariable: 'userName')]) {
         remote.user = userName
         remote.identityFile = identifyFile
-        stage("SSH Steps Rocks!") {
-            sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
+        stage("Download Namespace file") {
+            sshCommand remote: remote, command: 'wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/namespace.yaml'
+        }
+        stage("Apply Namespace") {
+            sshCommand remote: remote, command: 'kubectl apply -f namespace.yaml'
+        }
+        stage("Download Deployment file") {
+            sshCommand remote: remote, command: 'wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml'
+        }
+        stage("Apply Deployment") {
+            sshCommand remote: remote, command: 'kubectl apply -f deployment.yaml'
         }
     }
 }
