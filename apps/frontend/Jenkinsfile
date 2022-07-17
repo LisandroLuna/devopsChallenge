@@ -21,5 +21,8 @@ node {
         stage("Apply Deployment") {
             sshCommand remote: remote, command: "kubectl apply -f ./${JOB_NAME}-${BUILD_NUMBER}/deployment.yaml -n app-frontend"
         }
+        stage("Cleaning") {
+            sshCommand remote: remote, command: "rm -rf ${JOB_NAME}-${BUILD_NUMBER}"
+        }
     }
 }
