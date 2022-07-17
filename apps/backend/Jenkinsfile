@@ -8,6 +8,7 @@ node {
     withCredentials([sshUserPrivateKey(credentialsId: "sshUser", keyFileVariable: "identifyFile", passphraseVariable: "", usernameVariable: "userName")]) {
         remote.user = userName
         remote.identityFile = identifyFile
+        
         stage("Download Namespace file") {
             sshCommand remote: remote, command: "mkdir ${JOB_NAME}-${BUILD_NUMBER}"
             sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/namespace.yaml -P ${JOB_NAME}-${BUILD_NUMBER}"
@@ -20,6 +21,9 @@ node {
         }
         stage("Apply Deployment") {
             sshCommand remote: remote, command: "kubectl apply -f ./${JOB_NAME}-${BUILD_NUMBER}/deployment.yaml -n app-backend"
+        }
+        stage("Cleaning") {
+            sshCommand remote: remote, command: "rm -rf ${JOB_NAME}-${BUILD_NUMBER}"
         }
     }
 }
