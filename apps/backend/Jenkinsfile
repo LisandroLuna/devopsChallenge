@@ -16,7 +16,7 @@ pipeline {
                   manifestPattern: 'apps/backend', \
                   credentialsId: env.CREDENTIALS_ID, \
                   verifyDeployments: true])
-            }
+            } 
         }
     }
 }
