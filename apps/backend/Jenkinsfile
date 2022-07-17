@@ -39,8 +39,10 @@ pipeline {
             }
         }
         stage('List pods') {
-            withKubeConfig([credentialsId: 'My First Project', serverUrl: '35.225.244.101']) {
-                sh 'kubectl get pods'
+            steps{
+                withKubeConfig([credentialsId: 'My First Project', serverUrl: '35.225.244.101']) {
+                    sh 'kubectl get pods'
+                }
             }
         }
     }
