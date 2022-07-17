@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('List pods') {
             steps{
-                withKubeConfig([credentialsId: 'cluster001']) {
+                withKubeConfig([credentialsId: 'cluster001'], serverUrl:'35.225.244.101') {
                     sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
                     sh 'chmod u+x ./kubectl'  
                     sh './kubectl get pods'
