@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Deploy to K8s') {
             steps{
-                withKubeConfig([credentialsId: 'cluster001'
+                withKubeConfig([credentialsId: 'cluster001',
                     serverUrl: '35.225.244.101',
                     clusterName: 'cluster001'
                     ]) {
