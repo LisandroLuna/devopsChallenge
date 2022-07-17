@@ -8,10 +8,9 @@ pipeline {
     }
     stages {
         stage('Deploy to K8s') {
-             steps{
-
-                step{
-                    node {
+             //steps{
+                //step{
+                    node{
                         def remote = [:]
                         remote.name = 'worker'
                         remote.host = '10.128.0.11'
@@ -25,7 +24,7 @@ pipeline {
                 }
 
             //    step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'apps/backend/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-             }
-        }
+             //}
+       // }
     }
 }
