@@ -9,17 +9,17 @@ node {
         remote.user = userName
         remote.identityFile = identifyFile
         stage("Download Namespace file") {
-            sshCommand remote: remote, command: 'mkdir backend'
-            sshCommand remote: remote, command: 'wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/namespace.yaml -P backend'
+            sshCommand remote: remote, command: 'mkdir ${JOB_NAME}-${BUILD_NUMBER}'
+            sshCommand remote: remote, command: 'wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/namespace.yaml -P ${JOB_NAME}-${BUILD_NUMBER}'
         }
         stage("Apply Namespace") {
-            sshCommand remote: remote, command: 'kubectl apply -f ./backend/namespace.yaml'
+            sshCommand remote: remote, command: 'kubectl apply -f ./${JOB_NAME}-${BUILD_NUMBER}/namespace.yaml'
         }
         stage("Download Deployment file") {
-            sshCommand remote: remote, command: 'wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml -P backend'
+            sshCommand remote: remote, command: 'wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml -P ${JOB_NAME}-${BUILD_NUMBER}'
         }
         stage("Apply Deployment") {
-            sshCommand remote: remote, command: 'kubectl apply -f ./backend/deployment.yaml -n app-backend'
+            sshCommand remote: remote, command: 'kubectl apply -f ./${JOB_NAME}-${BUILD_NUMBER}/deployment.yaml -n app-backend'
         }
     }
 }
