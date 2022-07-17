@@ -1,12 +1,15 @@
+
+def remote = [:]
+remote.name = 'worker'
+remote.host = '10.128.0.11'
+remote.allowAnyHosts = true
+
 node {
-    def remote = [:]
-    remote.name = 'worker'
-    remote.host = '10.128.0.11'
-    remote.user = 'jenkins'
-    remote.password = env.jenkinsgce
-    remote.allowAnyHosts = true
-    stage('Remote SSH') {
-        sshCommand remote: remote, command: "ls -lrt"
-        sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
+    withCredentials([sshUserPrivateKey(credentialsId: 'jenkinsgce', keyFileVariable: 'identity', passphraseVariable: '', usernameVariable: 'jenkins')]) {
+        remote.user = userName
+        remote.identityFile = identity
+        stage("SSH Steps Rocks!") {
+            sshCommand remote: remote, command: 'for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done'
+        }
     }
-}    
+}
