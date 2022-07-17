@@ -7,14 +7,6 @@ pipeline {
         CREDENTIALS_ID = 'My First Project'
     }
     stages {
-        stage('List pods') {
-            steps{
-                sh 'wget "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
-                sh 'chmod u+x ./kubectl'  
-                sh './kubectl get pods'
-                sh 'export PATH=$PATH:/home/jenkins/agent/workspace/backend/kubectl'
-            }
-        }  
         stage('Deploy to K8s') {
             steps{
                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'apps/backend/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
