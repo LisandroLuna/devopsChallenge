@@ -7,42 +7,9 @@ pipeline {
         CREDENTIALS_ID = 'My First Project'
     }
     stages {
-        stage('Deploy to K8s') {
+        stage('Deploy to GKE') {
             steps{
-                kubeconfig(caCertificate: '''-----BEGIN CERTIFICATE-----
-                MIIELDCCApSgAwIBAgIQLcvhVke4AkhLbZkn3tLtITANBgkqhkiG9w0BAQsFADAv
-                MS0wKwYDVQQDEyQyNGViNDNkNS1hODc4LTRmMzMtOGY1Mi0zYWQ1YzhjZTFmMjQw
-                IBcNMjIwNzE2MTk1MTA0WhgPMjA1MjA3MDgyMDUxMDRaMC8xLTArBgNVBAMTJDI0
-                ZWI0M2Q1LWE4NzgtNGYzMy04ZjUyLTNhZDVjOGNlMWYyNDCCAaIwDQYJKoZIhvcN
-                AQEBBQADggGPADCCAYoCggGBALZELfKOBmW2AqBtfAJ21oSZkjlxCs7FuEGWfdeR
-                qRWlfWr2ACSZ74KxnILWML8+3O9fRn0KJq3srBTueItQFZgsb4Jo85cRfAvFtFod
-                r2OBfDhiOn6pM5pfHxQHE8bU26LX2pls6Gx6ynSlfwvr60b5kJjyXzbcSQS4NlAn
-                alA31Kkwc304kzeticJkS0g+5ilkMc0vxRULgOST2a8uCwngO4h8crzmBhHIgcTL
-                hJ7lVEw4ZwIDS/rFJefbmR+5rrKfa6c+Yfz6p8wBZZAXZK0P44+cj+s6ID8NeNOU
-                mzuAh8wu9y2m6TA/lHQSV6sfS19Q0UG4/NkA319zCsd8xIKSZ5VrIKSJ2KUEqzak
-                Yn1sjlL1ziVaPzkDjK4GyvCns0Tb2vRt79Z7EjrOHjiSAxmU6LfjZmVGKcQ/0L3W
-                LEBsBvbjQRQEiYViIFBXTkONmlUiBc1tfpoAxDG/bifSmR8QCLD+4pe2goa9F1jY
-                CGC0TmTRUe3tiJdp4eRvyJlHQwIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAgQwDwYD
-                VR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQU8MjRRmjUCItzaEW66oYGAWtsapEwDQYJ
-                KoZIhvcNAQELBQADggGBAJTSXOcFN6SxvXCUNeIjCGxKg7+I8tik9plaQs2TqikV
-                79l/6ikYnnSz7VIh5g/l+oRpm3YvX2hN/fWaNp6x5wM5iU/tbr3njGWxV4W5n/sQ
-                /khhWCsZLg6hllnjtGJn08eNS15cadJ3FW8LztvLYSNzz34XeuyH+cNHfWq78bQx
-                cGTapKUtpq10p8Qg1Dyoh+sxuQgPSJzXU5emzfn12m9s95QiGfmGHB31dIQQqUuD
-                BypfNi7ZKbcDNmf0Ej9pRPElDfQFxkRKEAuWpDUWVh3WVRwW8zH0+sMxMDLNumpT
-                dG106QznMJ72fmYenobFjCTXTIm77p1Fj9mQYGP15Hff+4rIsVzfKbNlLxXeBq2o
-                PdUaUurF/NtDb2RNa17GP+L4tlmLcbKMEpNHecV3w9Y3+cvSMS/afA7BU+0mxC6v
-                8PWsNQNsKos5VwPGJCTYlZsovfyx/PxfaiK5nAsmtoAurZBcjEAX8OhFROj+cXCW
-                UOsLzmoshRHFtTgE6zrqkQ==
-                -----END CERTIFICATE-----''', credentialsId: 'My First Project', serverUrl: '35.225.244.101') {
-                    // some block
-                }
-            }
-        }
-        stage('List pods') {
-            steps{
-                withKubeConfig([credentialsId: 'My First Project', serverUrl: '35.225.244.101']) {
-                    sh 'kubectl get pods'
-                }
+                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'apps/backend', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
     }
