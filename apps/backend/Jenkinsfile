@@ -1,15 +1,14 @@
 pipeline {
     agent any
     environment {
-                PROJECT_ID = 'seraphic-bliss-356414'
-                CLUSTER_NAME = 'cluster001'
-                LOCATION = 'us-central1-c'
-                CREDENTIALS_ID = 'My First Project'
+        PROJECT_ID = 'seraphic-bliss-356414'
+        CLUSTER_NAME = 'cluster001'
+        LOCATION = 'us-central1-c'
+        CREDENTIALS_ID = 'My First Project'
     }
-    
-    stages {    
+    stages {
         stage('Deploy to GKE') {
-            steps{  
+            steps{
                 step([
                 $class: 'KubernetesEngineBuilder',
                 projectId: env.PROJECT_ID,
@@ -19,6 +18,6 @@ pipeline {
                 credentialsId: env.CREDENTIALS_ID,
                 verifyDeployments: true])
             }
-        }    
+        }
     }
 }
