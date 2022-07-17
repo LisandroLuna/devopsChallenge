@@ -1,0 +1,6 @@
+kind: Namespace
+apiVersion: v1
+metadata:
+  name: app-frontend
+  labels:
+    name: app-frontend

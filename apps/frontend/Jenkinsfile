@@ -1,16 +1,25 @@
-pipeline {
-    agent any
-    environment {
-        PROJECT_ID = 'seraphic-bliss-356414'
-        CLUSTER_NAME = 'cluster001'
-        LOCATION = 'us-central1-c'
-        CREDENTIALS_ID = 'My First Project'
-    }
-    stages {
-        stage('Deploy to K8s') {
-            steps{
-               step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'apps/frontend/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-            }
+
+def remote = [:]
+remote.name = "worker"
+remote.host = "10.128.0.11"
+remote.allowAnyHosts = true
+
+node {
+    withCredentials([sshUserPrivateKey(credentialsId: "sshUser", keyFileVariable: "identifyFile", passphraseVariable: "", usernameVariable: "userName")]) {
+        remote.user = userName
+        remote.identityFile = identifyFile
+        stage("Download Namespace file") {
+            sshCommand remote: remote, command: "mkdir ${JOB_NAME}-${BUILD_NUMBER}"
+            sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/frontend/namespace.yaml -P ${JOB_NAME}-${BUILD_NUMBER}"
+        }
+        stage("Apply Namespace") {
+            sshCommand remote: remote, command: "kubectl apply -f ./${JOB_NAME}-${BUILD_NUMBER}/namespace.yaml"
+        }
+        stage("Download Deployment file") {
+            sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/frontend/deployment.yaml -P ${JOB_NAME}-${BUILD_NUMBER}"
+        }
+        stage("Apply Deployment") {
+            sshCommand remote: remote, command: "kubectl apply -f ./${JOB_NAME}-${BUILD_NUMBER}/deployment.yaml -n app-frontend"
         }
     }
 }
