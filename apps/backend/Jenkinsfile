@@ -13,6 +13,9 @@ pipeline {
                 echo "Deployment started ..."
                 sh 'ls -ltr'
                 sh 'pwd'
+                sh 'apt install mlocate -y'
+                sh 'updatedb'
+                sh 'locate kubectl'
                 step([$class: 'KubernetesEngineBuilder', \
                   projectId: env.PROJECT_ID, \
                   clusterName: env.CLUSTER_NAME, \
