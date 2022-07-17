@@ -1,21 +1,12 @@
-pipeline {
-    agent any
-    environment {
-        PROJECT_ID = 'seraphic-bliss-356414'
-        CLUSTER_NAME = 'cluster001'
-        LOCATION = 'us-central1-c'
-        CREDENTIALS_ID = 'My First Project'
+node {
+    def remote = [:]
+    remote.name = 'worker'
+    remote.host = '10.128.0.11'
+    remote.user = 'jenkins'
+    remote.password = env.jenkinsgce
+    remote.allowAnyHosts = true
+    stage('Remote SSH') {
+        sshCommand remote: remote, command: "ls -lrt"
+        sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
     }
-    node {
-        def remote = [:]
-        remote.name = 'worker'
-        remote.host = '10.128.0.11'
-        remote.user = 'jenkins'
-        remote.password = env.jenkinsgce
-        remote.allowAnyHosts = true
-        stage('Remote SSH') {
-            sshCommand remote: remote, command: "ls -lrt"
-            sshCommand remote: remote, command: "for i in {1..5}; do echo -n \"Loop \$i \"; date ; sleep 1; done"
-        }
-    }    
-}
+}    
