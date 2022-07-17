@@ -18,9 +18,8 @@ renderHelmLabels: true
 controller:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
-  image: "jenkins/jenkins"
-  # tag: "2.346.2-jdk11"
-  tagLabel: jdk11
+  image: "docker.io/lisandrodev/jenkins"
+  tag: "latest"
   imagePullPolicy: "Always"
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
@@ -244,7 +243,7 @@ controller:
     - configuration-as-code:1429.v09b_044a_c93de
 
   # Set to false to download the minimum required version of all dependencies.
-  installLatestPlugins: true
+  installLatestPlugins: false
 
   # Set to true to download latest dependencies of any plugin that is requested to have the latest version.
   installLatestSpecifiedPlugins: false
