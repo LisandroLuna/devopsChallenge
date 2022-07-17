@@ -8,11 +8,6 @@ pipeline {
     }
     
     stages {    
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Deploy to K8s') {
             steps{
                 echo "Deployment started ..."
