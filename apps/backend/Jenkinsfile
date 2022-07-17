@@ -18,7 +18,7 @@ node {
             sshCommand remote: remote, command: 'wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml'
         }
         stage("Apply Deployment") {
-            sshCommand remote: remote, command: 'kubectl apply -f deployment.yaml'
+            sshCommand remote: remote, command: 'kubectl apply -f deployment.yaml -n app-backend'
         }
     }
 }
