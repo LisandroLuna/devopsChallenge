@@ -7,18 +7,16 @@ pipeline {
         CREDENTIALS_ID = 'My First Project'
     }
     stages {
-        podTemplate(inheritFrom: 'default'){
-            node(POD_LABEL){
-                stage('Deploy to K8s') {
-                    steps{
-                        withKubeConfig([credentialsId: 'cluster001',
-                            serverUrl: '35.225.244.101',
-                            clusterName: env.CLUSTER_NAME
-                            ]) {
-                            sh 'kubectl get pods'
-                        }
-                    }
-                }
+        stage('List pods') {
+            withKubeConfig([credentialsId: 'cluster001']) {
+                sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
+                sh 'chmod u+x ./kubectl'  
+                sh './kubectl get pods'
+            }
+        }
+        stage('Deploy to K8s') {
+            steps{
+               step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'apps/backend/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
             }
         }
     }
