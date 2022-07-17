@@ -11,6 +11,7 @@ pipeline {
             sh 'wget "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
             sh 'chmod u+x ./kubectl'  
             sh './kubectl get pods'
+            sh 'export PATH=$PATH:/home/jenkins/agent/workspace/backend/kubectl'
         }  
         stage('Deploy to K8s') {
             steps{
