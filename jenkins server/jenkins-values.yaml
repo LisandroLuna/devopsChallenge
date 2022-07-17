@@ -18,8 +18,9 @@ renderHelmLabels: true
 controller:
   # Used for label app.kubernetes.io/component
   componentName: "jenkins-controller"
-  image: "docker.io/lisandrodev/jenkins"
-  tag: "latest"
+  image: "jenkins/jenkins"
+  # tag: "2.346.2-jdk11"
+  tagLabel: jdk11
   imagePullPolicy: "Always"
   imagePullSecretName:
   # Optionally configure lifetime for controller-container
@@ -241,9 +242,10 @@ controller:
     - workflow-aggregator:581.v0c46fa_697ffd
     - git:4.11.3
     - configuration-as-code:1429.v09b_044a_c93de
+    - google-kubernetes-engine:0.8.7
 
   # Set to false to download the minimum required version of all dependencies.
-  installLatestPlugins: false
+  installLatestPlugins: true
 
   # Set to true to download latest dependencies of any plugin that is requested to have the latest version.
   installLatestSpecifiedPlugins: false
