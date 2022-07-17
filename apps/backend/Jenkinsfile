@@ -9,8 +9,8 @@ pipeline {
     stages {
         stage('Deploy to K8s') {
             steps{
-                withKubeConfig([credentialsId: env.CREDENTIALS_ID, serverUrl: '35.225.244.101']) {
-                    sh '$(which kubectl) apply -f apps/backend/deployment.yaml'
+                withKubeConfig([credentialsId: env.CREDENTIALS_ID]) {
+                    sh '/usr/local/bin/kubectl apply -f apps/backend/deployment.yaml'
                 }
             }
         }
