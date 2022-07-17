@@ -7,9 +7,14 @@ pipeline {
         CREDENTIALS_ID = 'My First Project'
     }
     stages {
-        stage('Deploy to GKE') {
+        stage('Deploy to K8s') {
             steps{
-                step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'apps/backend', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                withKubeConfig([credentialsId: 'cluster001'
+                    serverUrl: '35.225.244.101',
+                    clusterName: 'cluster001'
+                    ]) {
+                    sh 'kubectl get pods'
+                }
             }
         }
     }
