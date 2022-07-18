@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
   fetch('http://backend.app-backend.svc.cluster.local:8080/Spring4-1/data/person?id=15')
   .then(response => response.json())
   .then(data => info = data); 
-  res.render('index', { title: 'Demo Frontend', name: data.name, location: data.location, page: 'Datos:' })
+  res.render('index', { title: 'Demo Frontend', name: info.name, location: info.location, page: 'Datos:' })
 })
 app.listen(80, () => {
   console.log('listening on port 80');
