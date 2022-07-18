@@ -14,7 +14,7 @@ spec:
         app: backend
     spec:
       containers:
-      - image: lisandrodev/api:v4
+      - image: lisandrodev/api:v5
         imagePullPolicy: Always
         name: backend
         ports:
