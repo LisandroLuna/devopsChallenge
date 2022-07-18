@@ -21,6 +21,12 @@ node {
         stage("Apply Deployment") {
             sshCommand remote: remote, command: "kubectl apply -f ./${JOB_NAME}-${BUILD_NUMBER}/deployment.yaml -n app-frontend"
         }
+        stage("Download Service file") {
+            sshCommand remote: remote, command: "wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/frontend/service.yaml -P ${JOB_NAME}-${BUILD_NUMBER}"
+        }
+        stage("Apply Service") {
+            sshCommand remote: remote, command: "kubectl apply -f ./${JOB_NAME}-${BUILD_NUMBER}/service.yaml -n app-frontend"
+        }
         stage("Cleaning") {
             sshCommand remote: remote, command: "rm -rf ${JOB_NAME}-${BUILD_NUMBER}"
         }
