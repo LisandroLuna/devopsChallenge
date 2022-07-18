@@ -9,7 +9,7 @@ Para hacer los build utilice una instancia de GCE y ejecuto los comandos por SSH
 
 ## Backend
 
-Contenedor con Tomcat 8, responde a una request basica en formato JSON.
+Contenedor con Tomcat 8, responde a una request basica en formato JSON. No fue desarrollado por mi ya que no poseo experiencia con java pero sirve para proveer la funcionalidad.
 
 Servicio del tipo ClusterIP para acceso interno.
 
@@ -18,6 +18,8 @@ Responde en este endpoint: http://backend.app-backend.svc.cluster.local:8080/Spr
 Ubicado en la carpeta 'apps/backend'.
 
 El Dockerfile utilizado para la el contenedor se encuentra en la carpeta antes mencionada.
+
+Fuente: https://www.concretepage.com/spring-4/spring-4-rest-web-service-json-example-tomcat
 
 ## Frontend
 
