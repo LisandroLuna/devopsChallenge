@@ -1,6 +1,6 @@
 FROM tomcat:8.0-alpine
 
-ADD ./war/api.war /usr/local/tomcat/webapps/
+ADD ./war/Spring4-1.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
