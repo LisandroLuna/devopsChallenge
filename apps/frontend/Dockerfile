@@ -5,6 +5,6 @@ COPY ./js ./
 
 RUN npm install -ci
 
-CMD ["node", "index.js"]
+CMD ["node", "index.mjs"]
 
 EXPOSE 80
