@@ -14,5 +14,5 @@ spec:
         app: frontend
     spec:
       containers:
-      - image: node
+      - image: lisandrodev/web
         name: frontend
