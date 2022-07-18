@@ -14,7 +14,7 @@ spec:
         app: backend
     spec:
       containers:
-      - image: lisandrodev/api
+      - image: lisandrodev/api:latest
         name: backend
         ports:
           - containerPort: 8080
