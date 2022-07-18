@@ -19,7 +19,7 @@ Responde en este endpoint: http://backend.app-backend.svc.cluster.local:8080/Spr
 
 ## Frontend
 
-Contenedor con NodeJs, obtiene datos simple del contenedor Tomcat.
+Contenedor con NodeJs, obtiene datos del contenedor Tomcat y los muestra en un template basico.
 
 Ubicado en carpeta 'apps/frontend'.
 
