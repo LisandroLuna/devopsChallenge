@@ -14,7 +14,7 @@ spec:
         app: backend
     spec:
       containers:
-      - image: tomcat
+      - image: lisandrodev/api
         name: backend
         ports:
           - containerPort: 8080
