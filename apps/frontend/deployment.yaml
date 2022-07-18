@@ -15,4 +15,5 @@ spec:
     spec:
       containers:
       - image: lisandrodev/web:v4
+        imagePullPolicy: Always
         name: frontend
