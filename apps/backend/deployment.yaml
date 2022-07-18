@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
       - image: lisandrodev/api:v2
+        imagePullPolicy: Always
         name: backend
         ports:
           - containerPort: 8080
