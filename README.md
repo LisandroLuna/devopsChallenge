@@ -11,7 +11,7 @@ Para hacer los build utilice una instancia de GCE y ejecuto los comandos por SSH
 
 Contenedor con Tomcat 8, responde a una request basica en formato JSON. No fue desarrollado por mi ya que no poseo experiencia con java pero sirve para proveer la funcionalidad.
 
-Servicio del tipo ClusterIP para acceso interno.
+Servicio del tipo ClusterIP para acceso interno. Utiliza el namespace 'app-backend'.
 
 Responde en este endpoint: http://backend.app-backend.svc.cluster.local:8080/Spring4-1/data/person?id=15
 
@@ -25,7 +25,7 @@ Fuente: https://www.concretepage.com/spring-4/spring-4-rest-web-service-json-exa
 
 Contenedor con NodeJs, obtiene datos del contenedor Tomcat y los muestra en un template basico.
 
-Servicio del tipo LoadBalancer para acceso externo.
+Servicio del tipo LoadBalancer para acceso externo. Utiliza el namespace 'app-frontend'.
 
 Responde en el puerto 80 con la IP que asigne el provider, en la version disponible al momento de actualizar este archivo: http://34.172.219.28:8080/
 
