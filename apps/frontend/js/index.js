@@ -1,5 +1,5 @@
 const express = require('express');
-import('node-fetch')
+import fetch from 'node-fetch';
 
 const app = express();
 app.set('views', './')
