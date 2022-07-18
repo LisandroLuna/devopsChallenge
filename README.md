@@ -11,19 +11,23 @@ Para hacer los build utilice una instancia de GCE y ejecuto los comandos por SSH
 
 Contenedor con Tomcat 8, responde a una request basica en formato JSON.
 
-Ubicado en la carpeta 'apps/backend'.
-
 Servicio del tipo ClusterIP para acceso interno.
 
 Responde en este endpoint: http://backend.app-backend.svc.cluster.local:8080/Spring4-1/data/person?id=15
+
+Ubicado en la carpeta 'apps/backend'.
+
+El Dockerfile utilizado para la el contenedor se encuentra en la carpeta antes mencionada.
 
 ## Frontend
 
 Contenedor con NodeJs, obtiene datos del contenedor Tomcat y los muestra en un template basico.
 
-Ubicado en carpeta 'apps/frontend'.
-
 Servicio del tipo LoadBalancer para acceso externo.
 
 Responde en el puerto 80 con la IP que asigne el provider, en la version disponible al momento de actualizar este archivo: http://34.172.219.28:8080/
+
+Ubicado en carpeta 'apps/frontend'.
+
+El Dockerfile utilizado para la el contenedor se encuentra en la carpeta antes mencionada.
 
