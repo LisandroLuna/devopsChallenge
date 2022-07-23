@@ -595,7 +595,7 @@ agent:
   workingDir: "/home/jenkins/agent"
   nodeUsageMode: "NORMAL"
   customJenkinsLabels: []
-  # name of the secret to be used for image pulling
+  # name of the secret to be used for image pulling.
   imagePullSecretName:
   componentName: "jenkins-agent"
   websocket: false

@@ -11,7 +11,8 @@ pipeline {
             steps{
                 sh '''#!/bin/bash
                         wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml
-                        wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml
+                        wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml 
+                        
                 '''
                 step([
                 $class: 'KubernetesEngineBuilder',
