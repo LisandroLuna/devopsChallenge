@@ -10,7 +10,7 @@ pipeline {
         stage('Deploy to GKE') {
             steps{
                 sh '''#!/bin/bash
-                        wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml
+                        wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/namespace.yaml
                         wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/backend/deployment.yaml 
                         
                 '''
