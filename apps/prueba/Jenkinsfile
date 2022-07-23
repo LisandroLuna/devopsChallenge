@@ -10,13 +10,7 @@ pipeline {
         stage('Deploy to GKE') {
             steps{
                 sh '''#!/bin/bash
-                        apt update; apt-get install -y apt-transport-https ca-certificates curl wget
-                        curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-                        echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list
-                        apt-get update
-                        apt install kubectl
                         wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/prueba/namespace.yaml
-                        wget https://raw.githubusercontent.com/LisandroLuna/devopsChallenge/main/apps/prueba/deployment.yaml
                 '''
                 step([
                 $class: 'KubernetesEngineBuilder',
@@ -24,14 +18,6 @@ pipeline {
                 clusterName: env.CLUSTER_NAME,
                 location: env.LOCATION,
                 manifestPattern: 'namespace.yaml',
-                credentialsId: env.CREDENTIALS_ID,
-                verifyDeployments: true])
-                step([
-                $class: 'KubernetesEngineBuilder',
-                projectId: env.PROJECT_ID,
-                clusterName: env.CLUSTER_NAME,
-                location: env.LOCATION,
-                manifestPattern: 'deployment.yaml',
                 credentialsId: env.CREDENTIALS_ID,
                 verifyDeployments: true])
             }
