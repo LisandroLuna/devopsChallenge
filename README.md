@@ -5,7 +5,7 @@ https://www.jenkins.io/doc/book/installing/kubernetes/
 
 Los archivos utilizados se encuentran en la carpeta 'jenkins-server' de este repositorio.
 
-Para hacer los build utilice una instancia de GCE y ejecuto los comandos por SSH, no logre configurar correctamente el agente de jenkins para utilizar kubectl y priorice la funcionalidad. 
+Para hacer los build modifique la imagen del contenedor Jenkins Agents para instalar las dependencias necesarias para su ejecucion, el Dockerfile se encuentra en 'jenkins server/Dockerfile'.
 
 ## Backend
 
